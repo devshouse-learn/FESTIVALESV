@@ -326,7 +326,7 @@ const eventsData = {
             ticketsSold: 450
         }
     ],
-    "santa marta": [
+    santamarta: [
         {
             id: 501,
             name: "Festival de Música del Magdalena",
