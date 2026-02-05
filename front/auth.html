@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta - Festivales</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 20px;
+        }
+
+        .auth-box {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+        }
+
+        .auth-box h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .auth-box p {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 10px;
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .toggle-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .toggle-link a:hover {
+            text-decoration: underline;
+        }
+
+        .form-hidden {
+            display: none;
+        }
+
+        .form-visible {
+            display: block;
+        }
+
+        .error-message {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: var(--danger);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message {
+            background: #efe;
+            border: 1px solid #cfc;
+            color: var(--success);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <a href="index.html" class="back-button">← Volver</a>
+
+            <!-- Mensaje de error -->
+            <div class="error-message" id="errorMessage"></div>
+            
+            <!-- Mensaje de éxito -->
+            <div class="success-message" id="successMessage"></div>
+
+            <!-- FORM: INICIAR SESIÓN -->
+            <div id="loginForm" class="form-visible">
+                <h1>Bienvenido</h1>
+                <p>Inicia sesión para acceder a tu cuenta</p>
+                
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Correo electrónico</label>
+                        <input type="email" id="loginEmail" required placeholder="tu@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña</label>
+                        <input type="password" id="loginPassword" required placeholder="••••••••">
+                    </div>
+
+                    <button type="submit" class="btn-submit">Iniciar sesión</button>
+                </form>
+
+                <div class="toggle-link">
+                    ¿No tienes cuenta? <a onclick="toggleForms()">Regístrate aquí</a>
+                </div>
+            </div>
+
+            <!-- FORM: REGISTRO -->
+            <div id="registerForm" class="form-hidden">
+                <h1>Crear Cuenta</h1>
+                <p>Únete a Festivales hoy</p>
+                
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="registerName">Nombre completo</label>
+                        <input type="text" id="registerName" required placeholder="Juan Pérez">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail">Correo electrónico</label>
+                        <input type="email" id="registerEmail" required placeholder="tu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPhone">Teléfono</label>
+                        <input type="tel" id="registerPhone" required placeholder="3001234567">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword">Contraseña</label>
+                        <input type="password" id="registerPassword" required placeholder="••••••••">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPasswordConfirm">Confirmar contraseña</label>
+                        <input type="password" id="registerPasswordConfirm" required placeholder="••••••••">
+                    </div>
+
+                    <button type="submit" class="btn-submit">Crear cuenta</button>
+                </form>
+
+                <div class="toggle-link">
+                    ¿Ya tienes cuenta? <a onclick="toggleForms()">Inicia sesión aquí</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Alternar entre formularios
+        function toggleForms() {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            
+            loginForm.classList.toggle('form-visible');
+            loginForm.classList.toggle('form-hidden');
+            registerForm.classList.toggle('form-visible');
+            registerForm.classList.toggle('form-hidden');
+            
+            // Limpiar mensajes
+            clearMessages();
+        }
+
+        // Manejar login
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Validar datos básicos
+            if (!email || !password) {
+                showError('Por favor, completa todos los campos');
+                return;
+            }
+
+            // Simular login (en producción, hacer petición a API)
+            console.log('Login:', { email, password });
+            showSuccess('Inicio de sesión exitoso! Redirigiendo...');
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        // Manejar registro
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const phone = document.getElementById('registerPhone').value;
+            const password = document.getElementById('registerPassword').value;
+            const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+            
+            // Validar datos
+            if (!name || !email || !phone || !password || !passwordConfirm) {
+                showError('Por favor, completa todos los campos');
+                return;
+            }
+
+            if (password !== passwordConfirm) {
+                showError('Las contraseñas no coinciden');
+                return;
+            }
+
+            if (password.length < 6) {
+                showError('La contraseña debe tener al menos 6 caracteres');
+                return;
+            }
+
+            // Validar teléfono (10 dígitos)
+            if (!/^\d{10}$/.test(phone)) {
+                showError('El teléfono debe tener 10 dígitos');
+                return;
+            }
+
+            // Simular registro (en producción, hacer petición a API)
+            console.log('Registro:', { name, email, phone });
+            showSuccess('Cuenta creada exitosamente! Redirigiendo...');
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        // Mostrar error
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        // Mostrar éxito
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+        }
+
+        // Limpiar mensajes
+        function clearMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

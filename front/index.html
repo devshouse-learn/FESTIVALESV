@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festivales - Compra Tus Entradas Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <i class="fas fa-ticket-alt"></i> Festivales
+            </div>
+            <div class="navbar-menu">
+                <a href="#" class="nav-link">Mis Compras</a>
+                <a href="#" class="nav-link">Favoritos</a>
+                <a href="auth.html" class="btn-login">Iniciar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Search Section -->
+    <header class="hero-section">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>Descubre los mejores eventos</h1>
+                <p>Compra tus entradas de forma segura y rápida</p>
+                
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Busca eventos, artistas o lugares...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filtros y Selector de Ciudad -->
+    <div class="filters-bar">
+        <div class="container-filters">
+            <select id="citySelect" class="city-select">
+                <option value="">Todas las ciudades</option>
+                <option value="bogota">Bogotá</option>
+                <option value="medellin">Medellín</option>
+                <option value="cali">Cali</option>
+                <option value="barranquilla">Barranquilla</option>
+                <option value="cartagena">Cartagena</option>
+                <option value="bucaramanga">Bucaramanga</option>
+                <option value="cucuta">Cúcuta</option>
+                <option value="santa-marta">Santa Marta</option>
+                <option value="pereira">Pereira</option>
+                <option value="manizales">Manizales</option>
+            </select>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all"><i class="fas fa-star"></i> Todos</button>
+                <button class="filter-btn" data-filter="musica"><i class="fas fa-music"></i> Música</button>
+                <button class="filter-btn" data-filter="teatro"><i class="fas fa-theater-masks"></i> Teatro</button>
+                <button class="filter-btn" data-filter="deportes"><i class="fas fa-football-ball"></i> Deportes</button>
+                <button class="filter-btn" data-filter="cultura"><i class="fas fa-palette"></i> Cultura</button>
+                <button class="filter-btn" data-filter="gastronomia"><i class="fas fa-utensils"></i> Gastronomía</button>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Sección de Eventos Destacados -->
+            <section class="highlighted-section">
+                <h2>Eventos Destacados</h2>
+                <div id="highlightedEvents" class="events-grid-featured">
+                    <!-- Cargado dinámicamente -->
+                </div>
+            </section>
+
+            <!-- Sección de Todos los Eventos -->
+            <section class="all-events-section">
+                <h2>Próximos Eventos</h2>
+                <div id="eventsList" class="events-grid">
+                    <!-- Cargado dinámicamente -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Festivales</h4>
+                <ul>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Información</h4>
+                <ul>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Seguridad</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Festivales - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Evento -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Evento" class="modal-image">
+                <div class="modal-info">
+                    <h2 id="modalTitle"></h2>
+                    <p class="modal-category" id="modalCategory"></p>
+                    <div class="modal-details">
+                        <p><i class="fas fa-calendar"></i> <strong id="modalDate"></strong></p>
+                        <p><i class="fas fa-clock"></i> <strong id="modalTime"></strong></p>
+                        <p><i class="fas fa-map-marker-alt"></i> <strong id="modalLocation"></strong></p>
+                    </div>
+                    <p id="modalDescription"></p>
+                    <div class="modal-footer">
+                        <span class="price" id="modalPrice"></span>
+                        <button class="btn-buy">Comprar Entradas</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

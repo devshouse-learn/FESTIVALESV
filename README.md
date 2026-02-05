@@ -1,159 +1,214 @@
-# 🎭 EventosCO - Plataforma de Eventos en Colombia
+# 🎭 Festivales - Plataforma de Compra de Entradas
 
-Una aplicación web moderna e interactiva para descubrir eventos en las principales ciudades de Colombia.
+Una plataforma moderna para descubrir y comprar entradas para eventos en toda Colombia, inspirada en el estilo y funcionalidad de tuboleta.com.
+
+## � Estructura del Proyecto
+
+```
+FESTIVALESV/
+├── front/                      # 🎨 Frontend
+│   ├── index.html              # Página principal
+│   ├── auth.html               # Página de autenticación
+│   ├── styles.css              # Estilos CSS
+│   ├── app.js                  # Lógica del frontend
+│   └── README.md               # Documentación frontend
+│
+├── back/                       # 🔧 Backend
+│   ├── server.js               # Servidor Express
+│   ├── package.json            # Dependencias npm
+│   ├── data.js                 # Base de datos
+│   ├── config.js               # Configuración
+│   ├── start.sh                # Script de inicio
+│   ├── .env.example            # Variables de entorno
+│   ├── routes/                 # API endpoints
+│   │   ├── events.js
+│   │   ├── users.js
+│   │   └── orders.js
+│   └── README.md               # Documentación backend
+│
+├── README.md                   # Este archivo
+├── INSTALACION.md              # Guía de instalación
+├── API.md                      # Documentación de API
+└── PROYECTO_RESUMEN.txt        # Resumen del proyecto
+```
+
+## 🚀 Inicio Rápido
+
+### 1. Backend
+
+```bash
+cd back
+npm install
+npm start
+```
+
+El backend estará en: `http://localhost:3000`
+
+### 2. Frontend
+
+En otra terminal:
+
+```bash
+cd front
+python3 -m http.server 8000
+```
+
+O abre `front/index.html` con VS Code Live Server.
+
+El frontend estará en: `http://localhost:8000`
 
 ## 📋 Características
 
-✨ **15 ciudades colombianas principales:**
-- Bogotá
-- Medellín
-- Cali
-- Barranquilla
-- Cartagena
-- Bucaramanga
-- Cúcuta
-- Santa Marta
-- Pereira
-- Manizales
-- Villavicencio
-- Ibagué
-- Neiva
-- Pasto
-- Armenia
+✨ **Frontend Moderno**
+- Diseño responsivo al estilo tuboleta.com
+- Búsqueda en tiempo real
+- Filtrado por ciudad y categoría
+- Modal de detalles de eventos
+- Página de autenticación
 
-🎪 **Más de 100+ eventos** con información completa:
-- Fecha y hora exacta de cada evento
-- Ubicación específica en cada ciudad
-- Descripción detallada del evento
-- Precios en pesos colombianos (COP)
-- Categorización por tipo de evento
+🔧 **Backend Robusto**
+- API REST completa (13 endpoints)
+- Gestión de eventos, usuarios y órdenes
+- Validación de datos
+- CORS habilitado
+- Manejo de inventario
 
-🎯 **Funcionalidades principales:**
-- Selector de ciudad con cambio dinámico de eventos
-- Búsqueda en tiempo real por nombre, descripción y ubicación
-- Filtros por categoría:
-  - 🎵 Música
-  - ⚽ Deportes
-  - 🎨 Cultura
-  - 🍽️ Gastronomía
-  - 💻 Tecnología
-  - 💼 Negocios
-- Sección de eventos destacados
-- Diseño responsive (móvil, tablet, desktop)
-- Animaciones suaves y modernas
-- Interfaz intuitiva y atractiva
+📚 **Documentación**
+- README.md - Este archivo
+- back/README.md - Documentación del backend
+- front/README.md - Documentación del frontend
+- API.md - Referencia completa de endpoints
+- INSTALACION.md - Guía paso a paso
 
-## 🎨 Diseño
+## 🔌 API Endpoints
 
-- **Paleta de colores:** Coral/Naranja (primario), Teal (secundario), Amarillo (acentos)
-- **Tipografía:** Segoe UI con jerarquía clara
-- **Componentes:** Cards elegantes con hover effects
-- **Responsividad:** Mobile-first design
+Base URL: `http://localhost:3000/api`
 
-## 📁 Estructura de archivos
-
+### Eventos
 ```
-RY/
-├── index.html      # HTML principal
-├── styles.css      # Estilos CSS
-├── app.js          # Lógica de la aplicación
-├── data.js         # Datos de eventos por ciudad
-└── README.md       # Este archivo
+GET /events                    - Todos los eventos
+GET /events/city/:city         - Por ciudad
+GET /events/:id                - Por ID
+GET /events/search/:query      - Buscar
+GET /events/category/:cat      - Por categoría
 ```
 
-## 🚀 Cómo usar
-
-1. **Abre el archivo `index.html`** en tu navegador web
-2. **Selecciona una ciudad** usando el dropdown en el header
-3. **Busca eventos** escribiendo en la barra de búsqueda
-4. **Filtra por categoría** usando los botones de filtro
-5. **Descubre eventos destacados** en la sección principal
-
-## 💻 Requisitos
-
-- Un navegador web moderno (Chrome, Firefox, Safari, Edge)
-- No requiere instalación de dependencias
-- No requiere servidor backend
-
-## 🎯 Próximos pasos sugeridos
-
-- Conectar con una base de datos para eventos en tiempo real
-- Agregar sistema de login de usuarios
-- Implementar carrito de compra de entradas
-- Agregar calendario interactivo
-- Sistema de favoritos/wishlist
-- Notificaciones de nuevos eventos
-- Integración con redes sociales
-
-## 📊 Datos de eventos
-
-Cada evento incluye:
-- **ID única** para identificación
-- **Nombre** del evento
-- **Categoría** (música, deportes, cultura, etc.)
-- **Fecha** en formato "DD Mon YYYY"
-- **Hora** con rango de inicio y fin
-- **Ubicación** específica de la ciudad
-- **Descripción** detallada del evento
-- **Precio** en COP (pesos colombianos)
-- **Emoji** representativo
-- **Estado destacado** (featured o no)
-
-## 🔧 Personalización
-
-Puedes modificar fácilmente:
-
-### Colores (en `styles.css`)
-```css
---primary: #FF6B6B;      /* Color principal (coral)*/
---secondary: #4ECDC4;    /* Color secundario (teal) */
---accent: #FFE66D;       /* Color de acentos (amarillo) */
+### Usuarios
+```
+POST /users/register           - Registrar
+POST /users/login              - Login
+GET /users/:id                 - Obtener perfil
+PUT /users/:id                 - Actualizar perfil
 ```
 
-### Agregar nuevos eventos
-En `data.js`, agrega objetos al array de la ciudad deseada:
-```javascript
-{
-    id: XXX,
-    name: "Nombre del Evento",
-    category: "musica|deportes|cultura|gastronomia|tecnologia|negocios",
-    date: "DD Mon YYYY",
-    time: "HH:MM - HH:MM",
-    location: "Ubicación en la ciudad",
-    description: "Descripción del evento",
-    price: 50000,
-    image: "🎭",
-    featured: false
-}
+### Órdenes
+```
+POST /orders                   - Crear orden
+GET /orders/user/:userId       - Mis órdenes
+GET /orders/:orderId           - Detalle
+DELETE /orders/:orderId        - Cancelar
 ```
 
-## 📱 Compatibilidad
+Para más detalles, ver [API.md](API.md)
 
-- ✅ Desktop (1024px+)
-- ✅ Tablet (768px - 1023px)
-- ✅ Móvil (< 768px)
+## 🎨 Características Frontend
 
-## 🎯 Atajos de teclado
+- Navbar sticky con navegación
+- Hero section con búsqueda
+- Grid responsivo de eventos
+- Eventos destacados
+- Modal con detalles completos
+- Formularios de login/registro
+- Diseño mobile-first
+- Animaciones suaves
 
-- **Ctrl/Cmd + F:** Enfoca la barra de búsqueda
+## 🔧 Características Backend
 
-## 👨‍💻 Tecnologías utilizadas
+- Express.js moderno
+- 13 endpoints REST funcionales
+- Base de datos en memoria (configurable)
+- Validación de datos
+- Manejo de errores robusto
+- CORS habilitado
+- Logging de requests
 
-- HTML5
-- CSS3 (Grid, Flexbox, Gradients, Animations)
-- JavaScript vanilla (ES6+)
-- LocalStorage para preferencias
+## 📊 Datos Iniciales
+
+- 11 eventos
+- 10 ciudades colombianas
+- 7 categorías
+- 2 usuarios de prueba
+- Precios desde gratuito hasta $150,000
+
+## 🎯 Ciudades
+
+Bogotá, Medellín, Cali, Barranquilla, Cartagena, Bucaramanga, Cúcuta, Santa Marta, Pereira, Manizales
+
+## 🎭 Categorías
+
+Música, Teatro, Deportes, Cultura, Gastronomía, Tecnología, Negocios
+
+## 🛠️ Requisitos
+
+- Node.js 14+
+- npm o yarn
+- Navegador moderno
+- Python 3 (opcional, para servir frontend)
+
+## 📱 Responsivo
+
+- ✅ Mobile (< 480px)
+- ✅ Tablet (480px - 768px)
+- ✅ Desktop (> 768px)
+
+## 🔐 Seguridad (Próximas mejoras)
+
+- Implementar JWT
+- Hashear contraseñas
+- Validación más robusta
+- Rate limiting
+- HTTPS
+
+## 📚 Documentación Detallada
+
+- [INSTALACION.md](INSTALACION.md) - Guía paso a paso
+- [API.md](API.md) - Referencia de endpoints
+- [back/README.md](back/README.md) - Documentación backend
+- [front/README.md](front/README.md) - Documentación frontend
+
+## 🚀 Próximas Mejoras
+
+- Conectar a MongoDB
+- Sistema de pagos
+- Carrito de compras
+- Sistema de favoritos
+- Dashboard de admin
+- Notificaciones por email
+- Comentarios y reseñas
+
+## 📝 Notas
+
+- El backend se ejecuta en puerto 3000
+- El frontend se sirve en puerto 8000 (con http-server)
+- Los datos se almacenan en memoria (se pierden al reiniciar)
+- Ver `.env.example` para configurar variables de entorno
+
+## 💡 Tips
+
+1. Abre dos terminales: una para backend, otra para frontend
+2. Usa VS Code Live Server para desarrollo frontend más rápido
+3. Usa Postman para probar la API
+4. Verifica los logs del servidor para ver requests
+
+## 📞 Soporte
+
+Consulta los archivos de documentación incluidos en el proyecto.
 
 ## 📄 Licencia
 
-Este proyecto es de código abierto y puede ser utilizado libremente.
-
-## 📞 Contacto
-
-Para sugerencias, reportar bugs o contribuir a mejoras, por favor contacta al equipo de desarrollo.
+MIT - 2026
 
 ---
 
-**¡Disfruta descubriendo eventos increíbles en Colombia! 🎉**
+**¡Listo para usar! Ejecuta el backend y frontend según las instrucciones de inicio rápido.**
 
-Creado con ❤️ por el equipo de EventosCO

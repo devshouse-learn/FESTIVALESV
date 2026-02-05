@@ -1,0 +1,224 @@
+=============================================================================
+                    PROYECTO FESTIVALES - ESTRUCTURA FINAL
+=============================================================================
+
+FOLDER: /Users/ibacrea/Downloads/FESTIVALESV
+
+Estructura:
+-----------
+
+RAIZ/
+├── front/                  (Carpeta Frontend)
+├── back/                   (Carpeta Backend)
+└── Documentación:
+    ├── README.md
+    ├── INSTALACION.md
+    ├── API.md
+    └── ESTRUCTURA.md
+
+
+CARPETA: front/ (Frontend - Interfaz de Usuario)
+---------------------------------------------------
+
+Archivos:
+  • index.html             - Página principal con hero, búsqueda y grid
+  • auth.html              - Página de login/registro
+  • app.js                 - Lógica de JavaScript (búsqueda, filtrado)
+  • styles.css             - Diseño CSS moderno y responsivo
+  • README.md              - Documentación del frontend
+
+Para ejecutar:
+  cd front
+  python3 -m http.server 8000
+  
+  Luego abre: http://localhost:8000
+
+
+CARPETA: back/ (Backend - Servidor y API)
+------------------------------------------
+
+Archivos principales:
+  • server.js              - Servidor Express
+  • package.json           - Dependencias npm
+  • data.js                - Base de datos en memoria (eventos)
+  • config.js              - Configuración centralizada
+  • start.sh               - Script para iniciar
+  • .env.example           - Variables de entorno
+
+Subcarpeta routes/ (API Endpoints):
+  • events.js              - 5 endpoints para eventos
+  • users.js               - 4 endpoints para usuarios
+  • orders.js              - 4 endpoints para órdenes/compras
+
+Para ejecutar:
+  cd back
+  npm install    (solo primera vez)
+  npm start
+  
+  Servidor en: http://localhost:3000/api
+
+
+INSTRUCCIONES DE INICIO
+------------------------
+
+1. Terminal 1 - Backend:
+   $ cd /path/to/FESTIVALESV/back
+   $ npm install
+   $ npm start
+   
+   Resultado: Servidor en http://localhost:3000
+
+2. Terminal 2 - Frontend:
+   $ cd /path/to/FESTIVALESV/front
+   $ python3 -m http.server 8000
+   
+   Resultado: Sitio en http://localhost:8000
+
+3. Abre tu navegador:
+   http://localhost:8000
+
+
+API ENDPOINTS
+--------------
+
+Base URL: http://localhost:3000/api
+
+EVENTOS (5):
+  GET /events
+  GET /events/city/{city}
+  GET /events/{id}
+  GET /events/search/{query}
+  GET /events/category/{category}
+
+USUARIOS (4):
+  POST /users/register
+  POST /users/login
+  GET /users/{id}
+  PUT /users/{id}
+
+ORDENES (4):
+  POST /orders
+  GET /orders/user/{userId}
+  GET /orders/{orderId}
+  DELETE /orders/{orderId}
+
+
+DATOS INICIALES
+-----------------
+
+Ciudades: 10
+  - Bogota, Medellin, Cali, Barranquilla, Cartagena
+  - Bucaramanga, Cucuta, Santa Marta, Pereira, Manizales
+
+Categorias: 7
+  - Musica, Teatro, Deportes, Cultura, Gastronomia, Tecnologia, Negocios
+
+Eventos: 11
+  - Distribuidos en varias ciudades
+  - Precios desde $0 a $150,000
+
+
+DOCUMENTACION COMPLETA
+-----------------------
+
+En la raiz del proyecto encontraras:
+
+  • README.md           - Guia general del proyecto
+  • INSTALACION.md      - Paso a paso para instalar
+  • API.md              - Referencia completa de API
+  • ESTRUCTURA.md       - Descripcion detallada
+
+En cada carpeta:
+  • front/README.md     - Guia especifica del frontend
+  • back/README.md      - Guia especifica del backend
+
+
+CARACTERISTICAS CREADAS
+------------------------
+
+FRONTEND:
+  ✓ Navbar con navegacion
+  ✓ Hero section con gradiente
+  ✓ Barra de busqueda en tiempo real
+  ✓ Filtros por ciudad y categoria
+  ✓ Grid responsivo de eventos
+  ✓ Modal con detalles del evento
+  ✓ Formularios login/registro
+  ✓ Diseño mobile-first
+  ✓ Animaciones suaves
+  ✓ Responsive (mobile, tablet, desktop)
+
+BACKEND:
+  ✓ 13 endpoints API REST
+  ✓ Gestión de eventos
+  ✓ Autenticación de usuarios
+  ✓ Sistema de órdenes/compras
+  ✓ Validación de datos
+  ✓ CORS habilitado
+  ✓ Manejo de inventario
+  ✓ Base de datos en memoria
+  ✓ Manejo de errores robusto
+  ✓ Logging de requests
+
+
+REQUISITOS
+-----------
+
+  • Node.js 14+ (para backend)
+  • npm (viene con Node.js)
+  • Python 3 (opcional, para servir frontend)
+  • Navegador moderno (Chrome, Firefox, Safari, Edge)
+
+
+TAMAÑOS DE ARCHIVOS
+---------------------
+
+Frontend (total ~37 KB):
+  - index.html:     6.5 KB
+  - auth.html:      11 KB
+  - app.js:         7 KB
+  - styles.css:     12.8 KB
+
+Backend (total ~25 KB):
+  - server.js:      3.3 KB
+  - data.js:        5.8 KB
+  - config.js:      3.2 KB
+  - routes/events:  2.9 KB
+  - routes/users:   2.7 KB
+  - routes/orders:  3.4 KB
+
+
+CAMBIOS REALIZADOS
+--------------------
+
+1. Creada carpeta /front con todos los archivos de interfaz
+2. Creada carpeta /back con todos los archivos de servidor
+3. Reorganizados archivos en sus respectivas carpetas
+4. Añadido README.md en cada carpeta
+5. Actualizado README.md principal con nueva estructura
+6. Creado ESTRUCTURA.md con documentación detallada
+7. Mantenida documentacion (API.md, INSTALACION.md, etc) en raiz
+
+
+PROXIMOS PASOS
+---------------
+
+1. Ejecutar backend: npm install && npm start
+2. Ejecutar frontend: python3 -m http.server 8000
+3. Abrir navegador en http://localhost:8000
+4. Explorar la aplicacion
+
+
+SOPORTE
+--------
+
+Consulta los archivos de documentacion:
+  • INSTALACION.md  - Para problemas de instalacion
+  • API.md          - Para usar la API
+  • ESTRUCTURA.md   - Para entender la organizacion
+  • back/README.md  - Para backend
+  • front/README.md - Para frontend
+
+
+Proyecto completado: 5 de Febrero de 2026
+=============================================================================
