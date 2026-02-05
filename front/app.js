@@ -22,16 +22,39 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Cargar eventos
-function loadEvents() {
-    // Para desarrollo sin backend, usar datos locales
-    if (typeof eventsData !== 'undefined') {
-        allEvents = flattenEvents(eventsData);
-        renderEvents();
+async function loadEvents() {
+    try {
+        // Intentar cargar del backend API
+        const response = await fetch('http://localhost:3000/api/events');
+        if (response.ok) {
+            allEvents = await response.json();
+            renderEvents();
+        } else {
+            console.error('Error al cargar eventos del API');
+            // Fallback a datos locales si existen
+            if (typeof eventsData !== 'undefined') {
+                allEvents = flattenEvents(eventsData);
+                renderEvents();
+            }
+        }
+    } catch (error) {
+        console.error('Error conectando con el backend:', error);
+        // Fallback a datos locales
+        if (typeof eventsData !== 'undefined') {
+            allEvents = flattenEvents(eventsData);
+            renderEvents();
+        }
     }
 }
 
 // Aplanar estructura de eventos por ciudad
 function flattenEvents(data) {
+    // Si data es un array (viene del API), retornarlo directamente
+    if (Array.isArray(data)) {
+        return data;
+    }
+    
+    // Si es un objeto con ciudades, aplanar
     const flat = [];
     for (const city in data) {
         flat.push(...data[city].map(event => ({
